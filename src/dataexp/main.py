@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import sys
 import warnings
+import os
+from pathlib import Path
 
 from datetime import datetime
 
@@ -17,9 +19,16 @@ def run():
     """
     Run the crew.
     """
+    # Use OS-generic path handling
+    data_file = Path(__file__).parent / 'data' / 'titanic.csv'
+    
+    # Debug: Print the resolved path
+    print(f"Looking for data file at: {data_file}")
+    print(f"File exists: {data_file.exists()}")
+    
     inputs = {
-        'topic': 'AI LLMs',
-        'current_year': str(datetime.now().year)
+        'filename': str(data_file),  # Convert Path to string
+        'user_request': 'What is the average age of passengers in the Titanic dataset?',
     }
     
     try:
@@ -32,9 +41,12 @@ def train():
     """
     Train the crew for a given number of iterations.
     """
+    # Use OS-generic path handling
+    data_file = Path(__file__).parent / 'data' / 'titanic.csv'
+    
     inputs = {
-        "topic": "AI LLMs",
-        'current_year': str(datetime.now().year)
+        'filename': str(data_file),  # Convert Path to string
+        'user_request': 'What is the average age of passengers in the Titanic dataset?',
     }
     try:
         Dataexp().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
@@ -56,9 +68,12 @@ def test():
     """
     Test the crew execution and returns the results.
     """
+    # Use OS-generic path handling
+    data_file = Path(__file__).parent / 'data' / 'titanic.csv'
+    
     inputs = {
-        "topic": "AI LLMs",
-        "current_year": str(datetime.now().year)
+        'filename': str(data_file),  # Convert Path to string
+        'user_request': 'What is the average age of passengers in the Titanic dataset?',
     }
     
     try:
