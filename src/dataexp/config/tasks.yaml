@@ -29,20 +29,29 @@ run_sql_queries_task:
 
     You can use the following tools:
     - `execute_sql_on_csv`: Execute a SQL query on a CSV file.
+    - `save_dataframe`: Save DataFrame results to file (CSV, JSON, Parquet, Pickle)
+    - `cache_dataframe`: Cache DataFrame in memory for later use
+    - `load_dataframe`: Load DataFrame from saved file
+    - `get_cached_dataframe`: Retrieve cached DataFrame
 
     To use the tool "execute_sql_on_csv",
     ACTION: execute_sql_on_csv
-    ACTION_INPUT: {'filename', {filename},
-                   'sql_query', sql_query}
+    ACTION_INPUT: {'filename': {filename},
+                   'sql_query': sql_query}
 
     The SQL query will be executed within a DataFrame context. If you encountered issues,
     replace table name with df.
 
+    After executing the SQL query, ALWAYS save the results using one of these methods:
+    1. Save to file: save_dataframe with data, filename, and format
+    2. Cache in memory: cache_dataframe with data and cache_key
+
     With the output which contains the result of the SQL query,
-    you can then format the result into a structured JSON or DataFrame.
+    format the result into a structured JSON or DataFrame and save it.
     Also explain the result in a way that is easy to understand.
   expected_output: >
     A structured JSON or DataFrame containing the result of the SQL query,
-    along with an explanation of the result.
+    along with an explanation of the result. The DataFrame should be saved
+    either to a file or cached in memory for future use.
   agent: sql_executor
   

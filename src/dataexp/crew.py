@@ -4,7 +4,15 @@ from crewai.agents.agent_builder.base_agent import BaseAgent
 from crewai.knowledge.source.pdf_knowledge_source import PDFKnowledgeSource
 from typing import List
 import os
-from .tools.data_tool import get_column_names, execute_sql_on_csv, get_dataframe_info
+from .tools.data_tool import (
+    get_column_names, 
+    execute_sql_on_csv, 
+    get_dataframe_info,
+    save_dataframe,
+    load_dataframe,
+    cache_dataframe,
+    get_cached_dataframe
+)
 
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -44,7 +52,7 @@ class Dataexp():
         return Agent(
             config=self.agents_config['sql_executor'], # type: ignore[index]
             verbose=True,
-            tools=[execute_sql_on_csv]
+            tools=[execute_sql_on_csv, save_dataframe, load_dataframe, cache_dataframe, get_cached_dataframe]
         )
     
     # To learn more about structured task outputs,
