@@ -1,6 +1,6 @@
 interpret_user_input_task:
   description: >
-    Interpret the user's input to identify how to generate a SQL query to satisfy
+    Interpret {user_request} to identify how to generate a SQL query to satisfy
     their request. This may involve understanding the context and the specific data
     they are interested in.
 
@@ -32,7 +32,11 @@ run_sql_queries_task:
 
     To use the tool "execute_sql_on_csv",
     ACTION: execute_sql_on_csv
-    ACTION_INPUT: {filename, sql_query}
+    ACTION_INPUT: {'filename', {filename},
+                   'sql_query', sql_query}
+
+    The SQL query will be executed within a DataFrame context. If you encountered issues,
+    replace table name with df.
 
     With the output which contains the result of the SQL query,
     you can then format the result into a structured JSON or DataFrame.

@@ -25,6 +25,9 @@ def run():
     # Debug: Print the resolved path
     print(f"Looking for data file at: {data_file}")
     print(f"File exists: {data_file.exists()}")
+
+    if not data_file.exists():
+        raise FileNotFoundError(f"Data file not found: {data_file}")
     
     inputs = {
         'filename': str(data_file),  # Convert Path to string

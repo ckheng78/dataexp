@@ -27,7 +27,8 @@ class Dataexp():
     def data_engineer(self) -> Agent:
         return Agent(
             config=self.agents_config['data_engineer'], # type: ignore[index]
-            verbose=True
+            verbose=True,
+            tools=[get_column_names, get_dataframe_info]
         )
     
     @agent
