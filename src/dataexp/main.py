@@ -84,3 +84,28 @@ def test():
 
     except Exception as e:
         raise Exception(f"An error occurred while testing the crew: {e}")
+
+def run_streamlit():
+    """
+    Run the Streamlit web interface.
+    """
+    import subprocess
+    import sys
+    from pathlib import Path
+    
+    app_path = Path(__file__).parent.parent.parent / "app.py"
+    
+    try:
+        print("🚀 Starting Streamlit app...")
+        print(f"📁 App location: {app_path}")
+        print("🌐 Opening in browser at: http://localhost:8501")
+        
+        subprocess.run([
+            sys.executable, "-m", "streamlit", "run", str(app_path),
+            "--server.port", "8501",
+            "--server.headless", "false"
+        ])
+    except KeyboardInterrupt:
+        print("\n✅ Streamlit app stopped.")
+    except Exception as e:
+        print(f"❌ Error running Streamlit: {e}")

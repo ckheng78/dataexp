@@ -68,7 +68,6 @@ class Dataexp():
     def run_sql_queries_task(self) -> Task:
         return Task(
             config=self.tasks_config['run_sql_queries_task'], # type: ignore[index]
-            output_file='report.md'
         )
     
     @crew
